@@ -1,0 +1,13 @@
+--total number of friends the user has divided by the total number of users on the platform
+
+select user1, (count(*) / max(a.total_users)::float) * 100 as popularity_percent from
+(select count(*) as total_users from
+(select user1 from facebook_friends
+union
+select user2 from facebook_friends) combined) a
+join
+(select user1, user2 from facebook_friends
+union
+select user2 as user1, user1 as user2 from facebook_friends) user_friends
+on 1=1
+group by user1
