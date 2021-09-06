@@ -1,0 +1,7 @@
+with rnk as
+
+(select *, rank() over (order by cool desc) as r from yelp_reviews)
+
+select business_name, review_text from rnk
+
+where r = 1
