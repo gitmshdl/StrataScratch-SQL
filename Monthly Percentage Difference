@@ -1,0 +1,7 @@
+select to_char(created_at::date, 'YYYY-MM') as year_month,
+round((sum(value) - lag(sum(value), 1) over (w)) / lag(sum(value), 1) over (w) * 100,2)
+
+from sf_transactions
+group by year_month
+
+window w as (order by to_char(created_at::date, 'YYYY-MM'))
