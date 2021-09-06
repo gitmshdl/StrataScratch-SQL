@@ -1,0 +1,9 @@
+select
+
+(select max(salary) from db_employee join db_dept on department_id = db_dept.id
+
+where department = 'marketing') -
+
+(select max(salary) from db_employee join db_dept on department_id = db_dept.id
+
+where department = 'engineering') as salary_difference
