@@ -1,0 +1,5 @@
+select department, first_name, salary from
+
+(select *, rank() over (partition by department order by salary desc) as r from employee) rnk
+
+where r = 1
