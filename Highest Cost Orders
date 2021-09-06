@@ -1,0 +1,13 @@
+-- first_name, total cost of items, date
+-- 2019-02-01 to 2019-05-01
+-- sum the order costs on daily basis 
+
+with cte as (
+select first_name, sum(total_order_cost) as total_order_cost, order_date from customers
+join orders
+on customers.id = cust_id
+where order_date between '2019-02-01' and '2019-05-01'
+group by first_name, order_date)
+
+select first_name, total_order_cost, order_date from cte
+where total_order_cost in (select max(total_order_cost) from cte)
