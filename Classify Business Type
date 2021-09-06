@@ -1,0 +1,9 @@
+select
+    distinct business_name,
+    case
+        when lower(business_name) ilike '%restaurant%' then 'restaurant'
+        when lower(business_name) ilike any(array['%cafe%','%café%','%coffee%' ])then 'cafe'
+        when lower(business_name) ilike'%school%' then 'school'
+        else 'other'
+        end as business_type
+from sf_restaurant_health_violations
