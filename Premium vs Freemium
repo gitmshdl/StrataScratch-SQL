@@ -1,0 +1,15 @@
+--output date, non-paying downloads, paying downloads
+with cte as (
+select * from ms_user_dimension a
+join ms_acc_dimension b
+on a.acc_id = b.acc_id
+join ms_download_facts c
+on a.user_id = c.user_id),
+
+abc as (
+
+select date, sum(case when paying_customer = 'no' then downloads else 0 end) as non_paying,
+sum(case when paying_customer = 'yes' then downloads else 0 end) as paying
+from cte group by cte.date) 
+
+select * from abc where non_paying > paying
