@@ -1,0 +1,11 @@
+-- 1id 1product
+-- one day after first purchase
+-- multiple purchases same day
+-- same purchase over time
+
+--multiple dates, multiple products
+select count(distinct m.user_id) from marketing_campaign m,
+(select user_id, min(created_at) from marketing_campaign group by user_id) a where
+a.user_id = m.user_id and
+m.product_id not in (
+  select product_id from marketing_campaign where created_at=a.min and user_id=a.user_id )
