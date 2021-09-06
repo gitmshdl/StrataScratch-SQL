@@ -1,0 +1,3 @@
+SELECT 
+    min(t2.timestamp::TIMESTAMP - t1.timestamp::TIMESTAMP) session_duration
+FROM facebook_web_log t1
