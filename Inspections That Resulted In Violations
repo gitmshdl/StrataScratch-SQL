@@ -1,0 +1,7 @@
+select extract (year from inspection_date :: date) as year, count(*) as n_inspections
+
+from sf_restaurant_health_violations
+where business_name = 'Roxanne Cafe' and violation_id is not null
+
+group by year
+order by year
