@@ -1,0 +1,5 @@
+select count(distinct airbnb_hosts.host_id from airbnb_hosts
+join airbnb_apartments
+on airbnb_hosts.host_id = airbnb_apartments
+
+where nationality != country
