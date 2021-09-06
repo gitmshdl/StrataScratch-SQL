@@ -1,0 +1,6 @@
+with combined as (
+select * from worker
+join title on worker_id = worker_ref_id)
+
+select worker_title from combined
+where salary in (select max(salary) from combined)
