@@ -1,0 +1,15 @@
+with combined as 
+(select * from fb_eu_energy eu
+union all
+select * from fb_asia_energy asia
+union all
+select * from fb_na_energy na),
+
+totale as
+(select date, sum(consumption) as total_energy from combined
+group by date),
+
+maxe as
+(select max(total_energy) as max_energy from totale)
+
+select date, total_energy from totale join maxe on total_energy = max_energy
