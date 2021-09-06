@@ -1,0 +1,8 @@
+with cte as
+(select * from facebook_employees e
+left join facebook_hack_survey hs
+on id = employee_id and e.age = hs.age and e.gender = hs.gender)
+
+select location, avg(popularity) as avg_popularity
+from cte
+group by location
